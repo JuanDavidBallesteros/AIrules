@@ -1,0 +1,37 @@
+---
+description: MASTER ARCHITECTURE: The Dependency Rule and Separation of Concerns.
+globs: **/*
+---
+
+# Universal Architecture Standards
+
+**Goal:** Create software that is independent of frameworks, UI, databases, and external agencies.
+
+## 1. The Dependency Rule
+
+* **Direction:** Source code dependencies must point **inwards** only.
+* **Inner Layers (Domain):** Must NOT know about outer layers (Infrastructure/UI).
+  * *Violation:* A `User` entity importing a `SQLAlchemy` model.
+  * *Correct:* A `UserRepository` interface defined in the Domain, implemented in Infrastructure.
+
+## 2. Layers of the Onion
+
+1. **Domain (Core):**
+    * Contains: Enterprise business rules, Entities, Value Objects.
+    * Deps: None. Pure language (Python dataclasses, TS Interfaces, Go Structs).
+2. **Application (Use Cases):**
+    * Contains: Application specific business rules (e.g., `CreateUserUseCase`).
+    * Deps: Domain.
+3. **Adapters (Interface):**
+    * Contains: Controllers, Presenters, Gateways, DTOs.
+    * Deps: Application.
+4. **Infrastructure (External):**
+    * Contains: Frameworks (NestJS, Django), Databases, HTTP Clients.
+    * Deps: Adapters.
+
+## 3. Dependency Injection (DI)
+
+* **Rule:** Never instantiate a dependency (like a database connection) inside a business logic class.
+* **Pattern:** Invert control. Pass the dependency via constructor or interface.
+  * *Bad:* `this.db = new PostgresDB()`
+  * *Good:* `constructor(private repo: UserRepository)`

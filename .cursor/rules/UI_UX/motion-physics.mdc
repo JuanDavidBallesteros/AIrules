@@ -1,0 +1,42 @@
+---
+description: MOTION RULES: Animations, Transitions, and Interaction Feedback.
+globs: **/*.tsx
+---
+
+# Motion Physics & Interaction
+
+## The "Everything Reacts" Law
+
+User actions must trigger immediate visual feedback.
+
+* **Hover States:**
+  * Lift: `hover:-translate-y-1`
+  * Scale: `hover:scale-[1.02]`
+  * Glow: `hover:shadow-lg hover:shadow-purple-500/20` (use context-appropriate color).
+  * Border: `hover:border-white/20`.
+* **Active/Click States:**
+  * Press: `active:scale-[0.98]`.
+
+## Entrance Animations
+
+Elements must not appear instantly. They must flow in.
+
+* **Standard Entrance:**
+  * *Action:* Fade in and slide up.
+  * *Tailwind:* `animate-in fade-in slide-in-from-bottom-6 duration-500 ease-out`.
+* **Staggering:** When loading a list or grid, stagger the entrance of each item by 50ms-100ms (requires Framer Motion or custom CSS delays).
+
+## Transition Physics
+
+* **Duration:** Never use instant changes.
+  * *Short (Hover):* `duration-200` or `duration-300`.
+  * *Long (Entrance):* `duration-500` to `duration-700`.
+* **Timing Function:** Avoid linear. Use `ease-out` or a custom spring curve equivalent to `cubic-bezier(0.16, 1, 0.3, 1)`.
+
+## Group Interactions
+
+Use the `group` class on parent containers to trigger child animations.
+
+* *Example:* Hovering a card makes the arrow icon inside it move right.
+  * Parent: `group`
+  * Child: `transition-transform group-hover:translate-x-1`

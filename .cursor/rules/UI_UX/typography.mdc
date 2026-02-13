@@ -1,0 +1,35 @@
+---
+description: TYPOGRAPHY RULES: Fonts, tracking, and text hierarchy.
+globs: **/*.tsx, **/*.css
+---
+
+# Typography System
+
+## Font Strategy: The "Editorial" Pairing
+
+* **Headings (Display):** Use a Grotesk or Condensed font (e.g., Instrument Sans, Geist Mono, Inter Tight).
+  * *Tracking:* Tight (`tracking-tight` or `tracking-tighter`).
+  * *Weight:* Semibold (600) or Bold (700).
+* **Body (Readability):** Use a clean Sans-Serif (e.g., Inter, Geist Sans).
+  * *Tracking:* Normal or slightly loose (`tracking-normal`).
+  * *Weight:* Regular (400) or Medium (500).
+
+## Hierarchy Rules
+
+1. **H1 (Hero):** * Size: `text-4xl md:text-6xl lg:text-7xl`
+    * Effect: often uses `bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60`.
+2. **H2 (Section):**
+    * Size: `text-2xl md:text-3xl`
+    * Tracking: `tracking-tight`
+3. **H3 (Card Title):**
+    * Size: `text-lg md:text-xl`
+    * Weight: `font-medium`
+4. **Body Text:**
+    * Size: `text-sm` or `text-base`
+    * Color: `text-muted-foreground` (Never pure white).
+    * Line Height: `leading-relaxed`.
+
+## Micro-Typography
+
+* **Uppercase:** If using uppercase, strictly add `tracking-widest` and `text-xs font-semibold`.
+* **Numbers:** Use tabular nums (`tabular-nums`) for data/dashboards.

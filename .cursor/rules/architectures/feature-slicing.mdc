@@ -1,0 +1,46 @@
+---
+description: FOLDER STRUCTURE: Vertical Slicing (Feature-First) over Horizontal Layering.
+globs: **/*
+---
+
+# Vertical Slicing (Feature-First)
+
+**Principle:** Locate code by **what it does** (Feature), not **what it is** (Controller/Service).
+
+## 1. The Structure
+
+Organize the codebase into self-contained modules or features.
+
+* **Bad (Horizontal/Layered):**
+
+    ```text
+    /controllers
+      auth_controller.ts
+      cart_controller.ts
+    /services
+      auth_service.ts
+      cart_service.ts
+    ```
+
+* **Good (Vertical/Feature):**
+
+    ```text
+    /features
+      /auth
+        auth_controller.ts
+        auth_service.ts
+        auth_model.ts
+      /cart
+        cart_controller.ts
+        cart_service.ts
+    ```
+
+## 2. Screaming Architecture
+
+* **Rule:** The top-level directory structure should scream the intent of the system, not the framework used.
+* *Example:* Looking at the root folder, you should see `orders`, `inventory`, `users` (the Business), not `models`, `views`, `controllers` (the MVC Framework).
+
+## 3. Shared Kernel
+
+* Common utilities (Date formatters, HTTP wrappers) go into a `shared/` or `common/` folder.
+* Features should minimize dependencies on each other. If Feature A needs Feature B, communicate via public Interfaces or Events.

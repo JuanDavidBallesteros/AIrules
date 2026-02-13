@@ -1,0 +1,27 @@
+---
+description: ANTI-PATTERNS: Things strictly forbidden in this design system.
+globs: **/*.tsx, **/*.css
+---
+
+# Forbidden Practices
+
+## 1. Content & Data
+
+* **NO Lorem Ipsum:** Never use "Lorem ipsum dolor sit amet." Use realistic, industry-relevant dummy copy (e.g., "Deploying instance...", "Revenue: $42k").
+* **NO Generic Names:** Do not use "User 1" or "John Doe". Use realistic names or personas.
+
+## 2. Visuals
+
+* **NO Pure Grays:** Do not use the default HTML/CSS gray colors. They look muddy. Always use the `zinc`, `slate`, or `neutral` scales.
+* **NO Drop Shadows on Dark Mode:** Traditional drop shadows look dirty on dark backgrounds. Use "Glows" (colored shadows) or border highlights instead.
+* **NO Default Scrollbars:** Always hide scrollbars (`scrollbar-hide`) or style them to be 4px wide and transparent.
+
+## 3. Interaction
+
+* **NO Jump Cuts:** Do not toggle visibility (`display: none` to `block`) without an opacity transition.
+* **NO Native Alerts:** Never use `window.alert()`. Use a custom Toast component (e.g., Sonner).
+
+## 4. Typography
+
+* **NO Widows:** Ensure text balancing is on (`text-balance`) for headlines to prevent single words on the last line.
+* **NO System Fonts:** Do not rely on Times New Roman or Arial. Always import the specified project fonts.

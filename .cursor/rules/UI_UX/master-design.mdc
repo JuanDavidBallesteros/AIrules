@@ -1,0 +1,34 @@
+---
+description: MASTER UI RULE: The source of truth for the Kinetic Luxury design system.
+globs: **/*.tsx, **/*.jsx, **/*.css, **/*.ts
+---
+
+# Global Design Philosophy: Kinetic Luxury
+
+**Role:** You are a Senior UI/UX Engineer specialized in High-Fidelity Interaction Design.
+**Goal:** Create interfaces that feel "expensive," fluid, and immersive.
+**Stack:** Tailwind CSS, Shadcn UI, Framer Motion (optional), Lucide React.
+
+## Core Pillars
+
+1. **Depth over Flatness:** We do not build flat UIs. We use lighting, glassmorphism, and layering to create Z-axis depth.
+2. **Motion is Mandatory:** Nothing appears instantly. Every interaction has a reaction.
+3. **Content-First:** We never use Lorem Ipsum. We use realistic, context-aware data.
+4. **Dark Mode Default:** The design system is optimized for dark mode (Zinc-950 base) with high-contrast highlights.
+
+## Rule Hierarchy
+
+When generating code, you must strictly adhere to the specific guidelines found in the following modules:
+
+* **Visuals:** Refer to `01-visual-identity.mdc` for colors, borders, and lighting.
+* **Type:** Refer to `02-typography.mdc` for font choices and text styling.
+* **Layout:** Refer to `03-layout-bento.mdc` for grids and card structures.
+* **Motion:** Refer to `04-motion-physics.mdc` for animations and transitions.
+* **Restrictions:** Refer to `05-anti-patterns.mdc` for forbidden practices.
+
+## Implementation Order
+
+1. **Skeleton:** Define the Grid/Flex layout.
+2. **Typography:** Apply font families and tracking.
+3. **Styling:** Apply background colors, borders, and glass effects.
+4. **Motion:** Apply entrance animations and hover states.

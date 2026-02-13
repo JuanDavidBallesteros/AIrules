@@ -1,0 +1,39 @@
+---
+description: ACCESSIBILITY & MOBILE: WCAG standards and touch-target rules.
+globs: **/*.tsx, **/*.css
+---
+
+# Accessibility & Mobile Standards
+
+## 📱 Mobile Interaction (The "Thumb Zone" Law)
+
+Mobile users should never struggle to tap a button.
+
+* **Touch Targets:**
+  * **Rule:** All interactive elements must have a hit area of at least `44x44px`.
+  * **Fix:** If a visual icon is small (e.g., `w-4 h-4`), use a wrapper padding: `p-3` or `-m-2 p-2` to increase the hit area without changing the visual size.
+* **Reachability:**
+  * Place primary actions (Save, Continue) at the *bottom* of the screen on mobile (within easy thumb reach).
+  * Use `sticky bottom-0` for mobile action bars.
+
+## ♿ Accessibility (WCAG 2.1 AA)
+
+"Luxury" does not mean "Low Contrast".
+
+* **Contrast Ratio:**
+  * Ensure text-to-background contrast is at least **4.5:1**.
+  * *Warning:* Be careful with `text-zinc-500` on `bg-zinc-900`. If it's too dark, bump it to `text-zinc-400`.
+* **Focus States:**
+  * Never use `outline-none` without replacing it with a custom focus ring.
+  * *Standard:* `focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2 focus-visible:ring-offset-black`.
+* **Semantic HTML:**
+  * Use `<button>` for actions, `<a>` for navigation.
+  * Never use `<div onClick={...}>`.
+
+## ⚡ Performance (Core Web Vitals)
+
+* **Images:**
+  * Always use `alt` tags.
+  * Use `priority` on the Largest Contentful Paint (LCP) image (usually the Hero image).
+* **Layout Shift (CLS):**
+  * Always define `aspect-ratio` or fixed `h-` classes for images/skeletons to prevent layout jumping when loading.

@@ -1,0 +1,70 @@
+---
+description: TESTING STANDARDS: AAA Pattern, Mocking, and Behavior Testing.
+globs: **/*.test.*, **/*.spec.*, **/tests/*
+---
+
+# Universal Testing Standards
+
+**Goal:** Tests should document the system behavior and allow refactoring without fear.
+
+## 1. The AAA Pattern
+
+Every test must follow the **Arrange, Act, Assert** structure clearly.
+
+```python
+# Bad
+def test_login():
+    user = create_user()
+    assert login(user) == True
+
+# Good
+def test_login_success():
+    # Arrange
+    user = create_user(password="secure")
+    
+    # Act
+    result = login_service.authenticate(user.email, "secure")
+    
+    # Assert
+    expect(result.is_success).to_be_true()
+```
+
+## 2. Test Behavior, Not Implementation
+
+Rule: Do not test how the code works (private methods, internal state). Test what it does (public API, return values, side effects).
+
+Benefit: This allows you to refactor internal logic (e.g., changing a loop to a map) without breaking tests.
+
+Anti-Pattern: Testing private methods directly (test_validate_email_regex) instead of the public method that calls them (test_register_user_with_invalid_email).
+
+## 3. Naming Tests
+
+Tests must read like documentation.
+
+Format: [UnitOfWork]_[StateUnderTest]_[ExpectedBehavior] or "Should... when..."
+
+Bad: test_1, test_login, test_fail
+
+Good: authenticate_withInvalidPassword_throwsError
+
+Good: it("should return 401 when token is expired")
+
+## 4. Mocking Strategy
+
+Mock Externalities: Always mock Databases, external APIs, File Systems, and Time (System Clock).
+
+Don't Mock Logic: Do not mock the class you are testing (the System Under Test). Only mock its dependencies.
+
+Don't Mock Data (DTOs): If an object is just a data container (User, Order), instantiate a real one. Don't mock it.
+
+## 5. F.I.R.S.T. Principles
+
+Fast: Unit tests should run in milliseconds. If it touches the DB, it's an Integration test.
+
+Independent: Tests should not rely on each other. No shared state (global variables) between tests.
+
+Repeatable: They must produce the same result in any environment (Dev, CI, Prod).
+
+Self-Validating: Tests must have a boolean output (Pass/Fail). No manual checking of logs.
+
+Timely: Write tests before or during coding, not months later.

@@ -1,0 +1,34 @@
+---
+description: FORM RULES: Inputs, validation, and data entry aesthetics.
+globs: **/*.tsx, **/*.ts
+---
+
+# Kinetic Forms
+
+## Input Aesthetics
+
+Inputs should feel tactile and substantial.
+
+* **Base Style:**
+  * Height: `h-10` or `h-12`.
+  * Background: `bg-zinc-900/50`.
+  * Border: `border-white/10`.
+  * Radius: `rounded-lg`.
+  * Transition: `transition-all duration-200`.
+* **Focus State:**
+  * `focus:border-white/20`
+  * `focus:bg-zinc-900` (Slightly lighter).
+  * `focus:ring-4 focus:ring-white/5` (Subtle outer glow).
+
+## Validation (The "Helpful" Rule)
+
+* **Inline Error:**
+  * Never rely solely on color (Red border) to convey errors.
+  * Always show a text message below the input: `text-red-400 text-xs mt-1 slide-in-from-top-1 animate-in`.
+* **Success State:**
+  * If valid, show a subtle green check icon on the right (`text-emerald-500`).
+
+## Labeling
+
+* **Labels:** Use `text-xs font-medium text-zinc-400 uppercase tracking-wider mb-1.5 block`.
+* **Placeholders:** Should be `text-zinc-600` (Darker than input text).

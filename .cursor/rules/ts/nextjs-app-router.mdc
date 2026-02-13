@@ -1,0 +1,38 @@
+---
+
+description: NEXT.JS STANDARDS: App Router, React Server Components (RSC), and Server Actions.
+globs: **/app/**/*.tsx, **/app/**/*.ts, **/components/**/*.tsx
+---
+
+# Next.js 14+ Standards
+
+**Goal:** Performance-first, server-centric React applications.
+
+## 1. App Router Structure
+
+* **Colocation:** Keep all related files (components, utils, styles) inside the route segment folder unless shared.
+  * `app/dashboard/page.tsx`
+  * `app/dashboard/dashboard-card.tsx`
+  * `app/dashboard/use-dashboard-data.ts`
+* **Server Components (RSC):** All components are Server by default. Add `"use client"` only when you need:
+  * `useState`, `useEffect`
+  * Event listeners (`onClick`)
+  * Browser APIs (`window`, `localStorage`)
+
+## 2. Data Fetching
+
+* **No useEffect:** Do not fetch data in `useEffect`. Fetch directly in RSCs using `await`.
+  * *Pattern:* `const data = await db.query.users.findMany()` inside `page.tsx`.
+* **Server Actions:** Use Server Actions for mutations (POST/PUT).
+  * *Filename:* `actions.ts` inside the feature folder.
+  * *Validation:* Always validate inputs with **Zod** inside the action.
+
+## 3. State Management
+
+* **URL State:** Prefer URL search params (`?tab=settings`) over `useState` for filter/sort/pagination state. This makes views shareable.
+* **Zustand:** Use Zustand for global client state if absolutely necessary (e.g., Audio Player, Shopping Cart).
+
+## 4. Performance
+
+* **Images:** Always use `next/image`. Define strictly `width` and `height` to prevent layout shift.
+* **Suspense:** Wrap slow RSCs in `<Suspense fallback={<Skeleton />}>` to show the "Kinetic" loading state immediately.

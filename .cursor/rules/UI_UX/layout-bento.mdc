@@ -1,0 +1,33 @@
+---
+description: LAYOUT RULES: Grids, Bento Box patterns, and Spacing.
+globs: **/*.tsx
+---
+
+# Layout & Structure
+
+## The Bento Grid Philosophy
+
+Layouts should be composed of distinct, modular "cells" or "cards" that fit together like a Japanese Bento box.
+
+* **Grid Specs:** Use CSS Grid for the macro layout.
+  * *Desktop:* `grid-cols-3` or `grid-cols-4`.
+  * *Tablet:* `grid-cols-2`.
+  * *Mobile:* `grid-cols-1`.
+* **Spanning:** To create visual interest, ensure some cards span multiple columns or rows.
+  * *Example:* `md:col-span-2` or `md:row-span-2`.
+
+## Card Architecture
+
+Every card in a Bento Grid must follow this structure:
+
+1. **Container:** `relative overflow-hidden rounded-xl border border-white/10 bg-zinc-900/50`.
+2. **Padding:** `p-6` (Standard) or `p-8` (Large).
+3. **Visual Anchor:** Every card needs a graphic element (Icon, Chart, Abstract Shape, or Image).
+    * *Rule:* Visuals should occupy 40-50% of the card's perceived weight.
+    * *Placement:* Visuals usually sit at the bottom or right side of the card, often bleeding off the edge.
+
+## Spacing System
+
+* **Relaxed Density:** Avoid clutter.
+* **Gap:** Standard grid gap is `gap-4` or `gap-6`.
+* **Section Spacing:** `py-24` or `py-32` between major page sections.

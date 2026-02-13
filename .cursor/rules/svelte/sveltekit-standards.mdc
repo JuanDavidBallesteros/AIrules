@@ -1,0 +1,33 @@
+---
+description: SVELTEKIT STANDARDS: Runes, Svelte 5 syntax, and Server Load functions.
+globs: **/*.svelte, **/*.ts, **/*.js
+---
+
+# SvelteKit & Svelte 5 Standards
+
+**Goal:** Reactive, lightweight, and standards-compliant web apps.
+
+## 1. Svelte 5 Syntax (Runes)
+
+* **State:** Use `$state()` instead of `let` variables.
+  * *Old:* `let count = 0;`
+  * *New:* `let count = $state(0);`
+* **Derived:** Use `$derived()` instead of `$:`.
+  * *New:* `let double = $derived(count * 2);`
+* **Effects:** Use `$effect()` instead of `onMount` where possible for side effects.
+
+## 2. Data Loading
+
+* **Page Data:** Load data in `+page.server.ts`.
+  * *Function:* `export const load: PageServerLoad = async ({ locals }) => { ... }`
+* **Type Safety:** Always use `App.PageData` interfaces.
+  * *Svelte:* `let { data }: { data: PageData } = $props();`
+
+## 3. Forms & Actions
+
+* **Form Actions:** Handle all submissions in `+page.server.ts` via strict `actions` exports.
+* **Progressive Enhancement:** Use `use:enhance` on all `<form>` elements to ensure they work without JS, then upgrade to AJAX automatically.
+
+## 4. Stores vs Runes
+
+* **Preference:** Prefer Runes (`$state.raw`) for local state. Use Svelte Stores (`writable`) only for cross-component module state that cannot be passed via props.

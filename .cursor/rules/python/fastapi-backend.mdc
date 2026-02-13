@@ -1,0 +1,40 @@
+---
+description: PYTHON & FASTAPI: Standards for modern, type-safe, and async Python backends.
+globs: **/*.py, **/*.toml
+---
+
+# Python & FastAPI Standards
+
+**Goal:** robust, high-performance, and strictly typed Python APIs.
+
+## 1. Project Structure (Vertical Slicing)
+
+* **Modules:** Group code by Feature, not by technical layer.
+  * *Bad:* `app/routers`, `app/models`, `app/schemas` (Horizontal).
+  * *Good:* `app/features/users`, `app/features/billing` (Vertical).
+* **Dependency Injection:** Use `Annotated` for all FastAPI dependencies.
+  * *Rule:* `db: Annotated[Session, Depends(get_db)]` instead of `db: Session = Depends(get_db)`.
+
+## 2. Typing & Pydantic (Strict)
+
+* **Type Hints:** Every function argument and return value must be typed.
+* **Pydantic V2:** Use `model_config = ConfigDict(extra="forbid")` by default.
+* **Return Types:** Explicitly declare response models in decorators.
+  * *Code:* `@router.post("/users", response_model=UserResponse)`
+
+## 3. Async & Performance
+
+* **Async/Await:** Use `async def` by default for all route handlers and DB calls.
+* **Blocking Code:** Run blocking CPU tasks (image processing, pandas) in a `ThreadPoolExecutor` or Celery worker, never in the main event loop.
+* **SQLAlchemy 2.0:** Use the `select()` syntax. Never use `Session.query()`.
+
+## 4. Error Handling
+
+* **Exceptions:** Do not return 400/500 manually. Raise custom exceptions.
+  * *Code:* `raise UserNotFoundException(user_id=123)`
+* **Global Handler:** Middleware must catch these exceptions and return a standardized JSON error format (see Universal Architecture).
+
+## 5. Tooling
+
+* **UV:** Use `uv` for package management (`uv add fastapi`).
+* **Ruff:** Use `ruff` for linting and formatting. configuration should be strict.

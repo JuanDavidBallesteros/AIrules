@@ -1,0 +1,26 @@
+---
+description: CODING STANDARDS: SOLID, DRY, and Naming Conventions.
+globs: **/*
+---
+
+# General Coding Standards
+
+## 1. SOLID Principles (Strict Enforcement)
+
+* **S - Single Responsibility:** A class/function should have one, and only one, reason to change.
+  * *Check:* If a function handles `Validation`, `Database Saving`, and `Email Notification`, split it.
+* **O - Open/Closed:** Open for extension, closed for modification. Use Interfaces/Polymorphism instead of massive `if/else` or `switch` statements.
+* **D - Dependency Inversion:** Depend on abstractions (Interfaces), not concretions (Classes).
+
+## 2. Naming Conventions
+
+* **Variables:** `noun` (e.g., `user`, `orderCount`).
+* **Booleans:** `is`, `has`, `can` prefix (e.g., `isValid`, `hasAccess`).
+* **Functions:** `verb` + `noun` (e.g., `getUser`, `calculateTotal`, `submitForm`).
+* **Async:** Do NOT append `Async` to function names (modern standard). usage implies await.
+
+## 3. Error Handling
+
+* **No Silent Failures:** Never use empty `try/catch` blocks.
+* **Typed Errors:** Throw custom error types (e.g., `UserNotFoundError`) rather than generic `Exception("User not found")`.
+* **Fail Fast:** Validate inputs at the start of the function. Return/throw immediately if invalid.

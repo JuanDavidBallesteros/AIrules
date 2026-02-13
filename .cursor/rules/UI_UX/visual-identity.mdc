@@ -1,0 +1,38 @@
+---
+description: VISUAL RULES: Colors, Lighting, Glassmorphism, and Texture.
+globs: **/*.tsx, **/*.css
+---
+
+# Visual Identity System
+
+## Color Palette (Dark Mode First)
+
+* **Background Base:** Never use pure Black (#000000). Use "Rich Black" tones.
+  * Primary: `bg-zinc-950` or `bg-[#09090b]`
+  * Secondary/Cards: `bg-zinc-900/50` or `bg-[#18181b]/50`
+* **Foreground (Text):**
+  * Primary: `text-zinc-50` (White-ish)
+  * Secondary: `text-zinc-400` (Cool Gray)
+  * Tertiary: `text-zinc-600` (Dark Gray)
+
+## Lighting & Depth
+
+* **Spotlight Effect:** Do not use solid background colors for active states. Use radial gradients to simulate a light source.
+  * *Implementation:* `bg-gradient-to-b from-white/10 to-transparent` (creates a top-down sheen).
+* **Borders:** Borders define the geometry, not backgrounds.
+  * *Standard:* `border border-white/5` or `border-zinc-800`.
+  * *Highlight:* `border-white/10` on hover.
+  * *Width:* Strictly 1px.
+
+## Glassmorphism
+
+* **Usage:** Use for sticky elements (navbars), modals, and floating cards.
+* **Formula:**
+  * Blur: `backdrop-blur-md` or `backdrop-blur-xl`
+  * Fill: `bg-black/40` or `bg-zinc-900/60`
+  * Border: `border-white/10`
+
+## Texture
+
+* **Noise:** To prevent color banding and add tactility, add a subtle noise texture to the main background if possible.
+  * *Opacity:* 0.02 to 0.04 (Very subtle).
