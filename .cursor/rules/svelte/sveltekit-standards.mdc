@@ -7,6 +7,8 @@ globs: **/*.svelte, **/*.ts, **/*.js
 
 **Goal:** Reactive, lightweight, and standards-compliant web apps.
 
+**Note:** For full Svelte 5 rune syntax, props, snippets, and event handling, see `svelte/svelte5-core.mdc`. This file focuses on SvelteKit-specific patterns (load, actions, stores vs runes).
+
 ## 1. Svelte 5 Syntax (Runes)
 
 * **State:** Use `$state()` instead of `let` variables.

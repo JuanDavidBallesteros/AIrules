@@ -1,0 +1,37 @@
+---
+description: SVELTEKIT ARCHITECTURE: Loaders, Form Actions, and Server-First Project Structure.
+globs: **/routes/**/*.ts, **/routes/**/*.svelte, **/lib/**/*.ts
+---
+
+# SvelteKit Architecture Rules
+
+**Goal:** "Server-First" data handling and typed routing.
+
+## 1. Data Loading (Server-Side)
+
+* **Location:** Always load data in `+page.server.ts`.
+* **Typing:** Use the auto-generated types from SvelteKit.
+  * *Server:* `export const load: PageServerLoad = async ({ locals }) => { ... }`
+  * *Client:* `let { data }: { data: PageData } = $props();`
+* **Parallel Loading:** Return a dictionary of promises in the `load` function to allow "Streaming" of data to the UI.
+
+## 2. Form Actions (Mutations)
+
+* **"No API" Rule:** Do not create `+server.ts` routes for form submissions. Use **Form Actions** in `+page.server.ts`.
+* **Structure:**
+
+    ```typescript
+    export const actions = {
+        default: async ({ request }) => {
+            const formData = await request.formData();
+            // validate and save
+        }
+    } satisfies Actions;
+    ```
+
+* **Progressive Enhancement:** Always use `use:enhance` on `<form>` elements.
+
+## 3. Library Structure (`/lib`)
+
+* **Colocation:** Keep shared UI strictly in `$lib/components`.
+* **Server Logic:** Keep database logic and secrets in `$lib/server`. SvelteKit prevents importing this into client code.

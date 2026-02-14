@@ -18,13 +18,15 @@ globs: **/*.tsx, **/*.jsx, **/*.css, **/*.ts
 
 ## Rule Hierarchy
 
-When generating code, you must strictly adhere to the specific guidelines found in the following modules:
+When generating code, you must strictly adhere to the specific guidelines found in the following modules (all in `UI_UX/`):
 
-* **Visuals:** Refer to `01-visual-identity.mdc` for colors, borders, and lighting.
-* **Type:** Refer to `02-typography.mdc` for font choices and text styling.
-* **Layout:** Refer to `03-layout-bento.mdc` for grids and card structures.
-* **Motion:** Refer to `04-motion-physics.mdc` for animations and transitions.
-* **Restrictions:** Refer to `05-anti-patterns.mdc` for forbidden practices.
+* **Visuals:** `visual-identity.mdc` — colors, borders, and lighting.
+* **Type:** `typography.mdc` — font choices and text styling.
+* **Layout:** `layout-bento.mdc` — grids and card structures.
+* **Motion:** `motion-physics.mdc` — animations and transitions.
+* **Restrictions:** `anti-patterns.mdc` — forbidden practices.
+* **Forms:** `forms.mdc` — inputs and validation aesthetics.
+* **Accessibility:** `accessibility-mobile.mdc` — WCAG and touch targets.
 
 ## Implementation Order
 

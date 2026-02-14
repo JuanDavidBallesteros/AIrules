@@ -1,0 +1,51 @@
+---
+description: SVELTE 5 STANDARDS: Mandatory Runes syntax, Snippets, and Event handling.
+globs: **/*.svelte, **/*.ts, **/*.js
+---
+
+# Svelte 5 Core Standards
+
+**Goal:** Write concise, reactive, and modern code using the Runes API. Avoid legacy Svelte 4 patterns.
+
+## 1. State Management (Runes)
+
+* **Local State:** Use `$state()` for all reactive variables.
+  * *Legacy (Svelte 4):* `let count = 0;`
+  * *Modern (Svelte 5):* `let count = $state(0);`
+* **Derived State:** Use `$derived()` for automatically calculated values.
+  * *Legacy:* `$: double = count * 2;`
+  * *Modern:* `let double = $derived(count * 2);`
+* **Side Effects:** Use `$effect()` sparingly. Prefer derived state whenever possible.
+  * *Rule:* Only use `$effect` for logs, analytics, or direct DOM manipulation that Svelte doesn't handle.
+
+## 2. Props & Interfaces
+
+* **Replacing export let:** Use the `$props()` rune with strict TypeScript interfaces.
+  * *Pattern:*
+
+      ```typescript
+      let { title, isActive = false }: { title: string; isActive?: boolean } = $props();
+      ```
+
+* **Rest Props:** Capture remaining props easily to pass them to HTML elements.
+  * *Pattern:* `let { class: className, ...rest } = $props();`
+
+## 3. Snippets (Replacing Slots)
+
+* **Definition:** DO NOT use `<slot>`. Use `{#snippet name(args)}`.
+* **Usage:** Pass snippets as props for flexible layouts.
+  * *Example:*
+
+      ```svelte
+      {#snippet header(text)}
+        <h1 class="text-xl font-bold">{text}</h1>
+      {/snippet}
+      <Card {header} />
+      ```
+
+## 4. Event Handling
+
+* **No Dispatcher:** DO NOT use `createEventDispatcher`. Pass callback functions as props.
+  * *Pattern:* `let { onSave }: { onSave: (id: string) => void } = $props();`
+  * *Trigger:* `<button onclick={() => onSave(id)}>Save</button>`
+* **DOM Events:** Use standard HTML attributes (`onclick`, `onkeydown`) instead of the `on:click` syntax.

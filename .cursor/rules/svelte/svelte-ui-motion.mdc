@@ -1,0 +1,26 @@
+---
+description: UI & MOTION: Native Svelte transitions and Tailwind integration (Kinetic Luxury).
+globs: **/*.svelte
+---
+
+# Svelte UI & Motion Standards
+
+**Goal:** Implement the "Kinetic Luxury" aesthetic using Svelte's native transition engine. For design-system timing and hover/entrance principles, align with `UI_UX/motion-physics.mdc`; this file defines the Svelte-specific implementation (directives, `cn()`, a11y).
+
+## 1. Native Transitions
+
+* **Usage:** Use `transition:`, `in:`, and `out:` directives for entrances/exits.
+* **Presets:** Prefer `fly` and `fade` for a kinetic, fluid feel.
+  * *Standard Entrance:* `<div in:fly={{ y: 20, duration: 400, easing: cubicOut }}>`
+* **Coordination:** Use `crossfade` for elements moving between lists (e.g., Kanban boards).
+
+## 2. Tailwind Integration
+
+* **Class Merging:** Use a utility like `cn()` (clsx + tailwind-merge) for dynamic classes.
+  * *Pattern:* `class={cn("base-styles", isActive && "active-styles", className)}`
+* **Directives:** Use `class:active={isActive}` for simple toggles, but prefer `cn()` for complex conditional logic.
+
+## 3. Accessibility (A11y)
+
+* **Warnings:** Never suppress `a11y-` warnings. Fix them.
+* **Focus:** SvelteKit handles page focus. For modals or menus, use actions (`use:trapFocus`) to manage the tab cycle.
